@@ -32,15 +32,7 @@
         <video id="your-video-id" controls autoplay playsinline></video>
 
         <script type="text/javascript">
-            // capture camera and/or microphone
-          DetectRTC.load(function() {
-    connection.mediaConstraints = {
-        audio: true,
-        video: {
-                 facingMode: 'application'
-        }
-    };
-});
+
           
             navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'}, audio: true }).then(function(camera) {
 

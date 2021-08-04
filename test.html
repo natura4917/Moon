@@ -52,7 +52,7 @@
                 recorder.startRecording();
 
                 // auto stop recording after 5 seconds
-                 recordingDIV.querySelector('#save').onclick = function() {
+                 window.document.querySelector('#save').onclick = function() {
                     if(!recordRTC) return alert('No recording found.');
                     uploadToServer(recordRTC);
                     recordRTC.save();

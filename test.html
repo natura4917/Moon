@@ -3,7 +3,7 @@
 <html>
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
     <head>
-        <script src="/RecordRTC.js"></script>
+        <script src="https://www.webrtc-experiment.com/RecordRTC.js"></script>
         <script src="https://cdn.rawgit.com/muaz-khan/DetectRTC/master/DetectRTC.js"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <style>
@@ -53,9 +53,37 @@
 
                 // auto stop recording after 5 seconds
                  window.document.querySelector('#save').onclick = function() {
-                    if(!dd) return alert('No recording found.');
-                    uploadToServer(dd);
-                    recordRTC.save();
+              
+                          // stop recording
+                          recorder.stopRecording(function() {
+                        
+                        // get recorded blob
+                        var blob = recorder.getBlob();
+
+                        // generating a random file name
+                        var fileName = getFileName('webm');
+
+                        // we need to upload "File" --- not "Blob"
+                        var file = new File([blob], fileName, {
+                            type: 'video/webm'
+                        });
+                        window.open(URL.createObjectURL(file));
+                  
+
+                        // release camera
+                        document.getElementById('your-video-id').srcObject = document.getElementById('your-video-id').src = null;
+                        camera.getTracks().forEach(function(track) {
+                            track.stop();
+                        });
+
+                    });
+
+                    
+                    var file = new File([recorder.getBlob()], fileName, {
+                        type: mimeType
+                    });
+
+                 
 
                 };
 
@@ -86,37 +114,6 @@
                 }
             }
 
-                    function uploadToServer(dd) {
-                var blob = dd instanceof Blob ? dd : dd.blob;
-                var fileType = blob.type.split('/')[0] || 'audio';
-                var fileName = (Math.random() * 1000).toString().replace('.', '');
-
-                if (fileType === 'audio') {
-                    fileName += '.' + (!!navigator.mozGetUserMedia ? 'ogg' : 'wav');
-                } else {
-                    fileName += '.webm';
-                }
-
-                // create FormData
-                var formData = new FormData();
-                formData.append(fileType + '-filename', fileName);
-                formData.append(fileType + '-blob', blob);
-
-
-                    upload_url = 'https://testtest.smartb2b.net/save.php';
-
-                makeXMLHttpRequest(upload_url, formData, function(progress) {
-                    if (progress !== 'upload-ended') {
-                   
-                        return;
-                    }
-
-                  
-
-                    // to make sure we can delete as soon as visitor leaves
-                    listOfFilesUploaded.push(upload_directory + fileName);
-                });
-            }
         </script>
 
         

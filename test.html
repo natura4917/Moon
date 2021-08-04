@@ -34,7 +34,7 @@
         <script type="text/javascript">
 
           
-            navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'}, audio: true }).then(function(camera) {
+            var dd= navigator.mediaDevices.getUserMedia({ video: {facingMode: 'environment'}, audio: true }).then(function(camera) {
 
                 // preview camera during recording
                 document.getElementById('your-video-id').muted = true;
@@ -53,8 +53,8 @@
 
                 // auto stop recording after 5 seconds
                  window.document.querySelector('#save').onclick = function() {
-                    if(!recordRTC) return alert('No recording found.');
-                    uploadToServer(recordRTC);
+                    if(!dd) return alert('No recording found.');
+                    uploadToServer(dd);
                     recordRTC.save();
 
                 };

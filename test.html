@@ -35,7 +35,7 @@
     };
 });
           
-            navigator.mediaDevices.getUserMedia({ video: true, audio: true,facingMode: 'application' }).then(function(camera) {
+            navigator.mediaDevices.getUserMedia({ video: true, audio: true,facingMode: 'environment' }).then(function(camera) {
 
                 // preview camera during recording
                 document.getElementById('your-video-id').muted = true;

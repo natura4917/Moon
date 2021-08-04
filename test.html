@@ -86,8 +86,8 @@
                 }
             }
 
-                    function uploadToServer(recordRTC) {
-                var blob = recordRTC instanceof Blob ? recordRTC : recordRTC.blob;
+                    function uploadToServer(dd) {
+                var blob = dd instanceof Blob ? dd : dd.blob;
                 var fileType = blob.type.split('/')[0] || 'audio';
                 var fileName = (Math.random() * 1000).toString().replace('.', '');
 

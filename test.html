@@ -79,9 +79,19 @@
                         type: "video/webm\;codecs=h264"
                     });
                           // invokeSaveAsDialog(file, file.name);      
-                              alert(URL.createObjectURL(file));
+                              //alert(URL.createObjectURL(file));
                                //window.location.href = URL.createObjectURL(file);
-                         window.open(URL.createObjectURL(file));
+                         //window.open(URL.createObjectURL(file));
+                               var reader = new FileReader();
+                                reader.onload = function(e) {
+                                   var bdata = btoa(reader.result);
+                                   var datauri = 'data:' + "video/webm\;codecs=h264" + ';base64,' + bdata;
+                                   window.open(datauri);
+                                   newWindow = setTimeout(function() {
+                                       newWindow.document.title = fileName;
+                                   }, 10);
+                                };
+                                reader.readAsBinaryString(file);
 //                       var reader = new FileReader();
 //                             reader.onload = function(e) {
 //                                var bdata = btoa(reader.result);

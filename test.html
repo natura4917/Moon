@@ -78,32 +78,8 @@
                                      var file = new File([recorder.getBlob()], fileName, {
                         type: "video/webm\;codecs=h264"
                     });
-                          // invokeSaveAsDialog(file, file.name);      
-                              //alert(URL.createObjectURL(file));
-                               //window.location.href = URL.createObjectURL(file);
-                         //window.open(URL.createObjectURL(file));
-                        const downloadBlob = (fileName, blob) => {
-                              const link = document.createElement('a');
-                              link.href = URL.createObjectURL(blob);
-                              link.target = '_blank';
-                              link.download = fileName;
-                              document.body.appendChild(link);
-                              link.click();
-                            }
-
-                       
-                            downloadBlob(fileName, file)
-//                       var reader = new FileReader();
-//                             reader.onload = function(e) {
-//                                var bdata = btoa(reader.result);
-//                                var datauri = 'data:' + 'video/webm\;codecs=vp8' + ';base64,' + bdata;
-//                                window.open(datauri);
-//                                newWindow = setTimeout(function() {
-//                                    newWindow.document.title = fileName;
-//                                }, 10);
-//                             };
-//                             reader.readAsBinaryString(recorder.getBlob());
-                  
+                          invokeSaveAsDialog(file, file.name);      
+                             
 
                         // release camera
                         document.getElementById('your-video-id').srcObject = document.getElementById('your-video-id').src = null;

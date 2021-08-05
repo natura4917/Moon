@@ -42,7 +42,16 @@
                 // recording configuration/hints/parameters
                 var recordingHints = {
                     type: 'video'
-                    ,  mimeType : 'video/webm\;codecs=vp8'
+                    ,  mimeType : 'video/webm\;codecs=vp8',
+                    recorderType:WebAssemblyRecorder,
+                       canvas: {
+        width: 640,
+        height: 480
+    },    // used by WebAssemblyRecorder
+    frameRate: 30,
+
+    // used by WebAssemblyRecorder
+    bitrate: 128000
                 };
 
                 // initiating the recorder
@@ -57,17 +66,21 @@
                           // stop recording
                           recorder.stopRecording(function() {
                         
-                        // get recorded blob
-                        var blob = recorder.getBlob();
+//                         // get recorded blob
+//                         var blob = recorder.getBlob();
 
-                        // generating a random file name
-                        var fileName = getFileName('webm');
-                    fileExtension = 'webm';
-                        // we need to upload "File" --- not "Blob"
-                        var file = new File([blob], fileName, {
-                            type: 'video/webm\;codecs=vp8'
-                        });
-                        window.open(URL.createObjectURL(file));
+//                         // generating a random file name
+//                         var fileName = getFileName('webm');
+//                     fileExtension = 'webm';
+//                         // we need to upload "File" --- not "Blob"
+//                         var file = new File([blob], fileName, {
+//                             type: 'video/webm\;codecs=vp8'
+//                         });
+                                     var file = new File([recordRTC.getBlob()], fileName, {
+                        type: mimeType
+                    });
+                           invokeSaveAsDialog(file, file.name);      
+//                         window.open(URL.createObjectURL(file));
                   
 
                         // release camera
@@ -112,6 +125,14 @@
                 } else {
                     return (Math.random() * new Date().getTime()).toString(36).replace(/\./g, '');
                 }
+            }
+            
+             function getFileName(fileExtension) {
+                var d = new Date();
+                var year = d.getUTCFullYear();
+                var month = d.getUTCMonth();
+                var date = d.getUTCDate();
+                return 'RecordRTC-' + year + month + date + '-' + getRandomString() + '.' + fileExtension;
             }
 
         </script>

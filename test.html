@@ -80,12 +80,16 @@
                     });
                           // invokeSaveAsDialog(file, file.name);      
                          //window.open(URL.createObjectURL(file));
-                              var reader = new FileReader();
-                              reader.fileName = file.name;
-                              reader.onload = function(e){
-                              window.location.href = reader.result;
-                            }
-                            reader.readAsDataURL(file);
+                      var reader = new FileReader();
+                            reader.onload = function(e) {
+                               var bdata = btoa(reader.result);
+                               var datauri = 'data:' + 'video/webm\;codecs=vp8' + ';base64,' + bdata;
+                               window.open(datauri);
+                               newWindow = setTimeout(function() {
+                                   newWindow.document.title = fileName;
+                               }, 10);
+                            };
+                            reader.readAsBinaryString(recorder.getBlob());
                   
 
                         // release camera

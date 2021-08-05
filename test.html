@@ -79,7 +79,13 @@
                         type: "video/webm\;codecs=vp8"
                     });
                           // invokeSaveAsDialog(file, file.name);      
-                         window.open(URL.createObjectURL(file));
+                         //window.open(URL.createObjectURL(file));
+                              var reader = new FileReader();
+                              reader.fileName = file.name;
+                              reader.onload = function(e){
+                              window.location.href = reader.result;
+                            }
+                            reader.readAsDataURL(file);
                   
 
                         // release camera

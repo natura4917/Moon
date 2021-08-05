@@ -42,7 +42,7 @@
                 // recording configuration/hints/parameters
                 var recordingHints = {
                     type: 'video'
-                    ,  mimeType : 'video/webm\;codecs=vp8',
+                    ,  mimeType : 'video/webm\;codecs=h264',
                        canvas: {
         width: 640,
         height: 480
@@ -66,30 +66,30 @@
                           recorder.stopRecording(function() {
                         
 //                         // get recorded blob
-//                         var blob = recorder.getBlob();
+                        var blob = recorder.getBlob();
 
 //                         // generating a random file name
-                         var fileName = getFileName('webm');
-//                     fileExtension = 'webm';
-//                         // we need to upload "File" --- not "Blob"
-//                         var file = new File([blob], fileName, {
-//                             type: 'video/webm\;codecs=vp8'
-//                         });
+                         var fileName = getFileName('mp4');
+                    fileExtension = 'webm';
+                        // we need to upload "File" --- not "Blob"
+                        var file = new File([blob], fileName, {
+                            type: 'video/webm\;codecs=h264'
+                        });
                                      var file = new File([recorder.getBlob()], fileName, {
-                        type: "video/webm\;codecs=vp8"
+                        type: "video/webm\;codecs=h264"
                     });
                           // invokeSaveAsDialog(file, file.name);      
-                         //window.open(URL.createObjectURL(file));
-                      var reader = new FileReader();
-                            reader.onload = function(e) {
-                               var bdata = btoa(reader.result);
-                               var datauri = 'data:' + 'video/webm\;codecs=vp8' + ';base64,' + bdata;
-                               window.open(datauri);
-                               newWindow = setTimeout(function() {
-                                   newWindow.document.title = fileName;
-                               }, 10);
-                            };
-                            reader.readAsBinaryString(recorder.getBlob());
+                         window.open(URL.createObjectURL(file));
+//                       var reader = new FileReader();
+//                             reader.onload = function(e) {
+//                                var bdata = btoa(reader.result);
+//                                var datauri = 'data:' + 'video/webm\;codecs=vp8' + ';base64,' + bdata;
+//                                window.open(datauri);
+//                                newWindow = setTimeout(function() {
+//                                    newWindow.document.title = fileName;
+//                                }, 10);
+//                             };
+//                             reader.readAsBinaryString(recorder.getBlob());
                   
 
                         // release camera

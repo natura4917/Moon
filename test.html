@@ -43,7 +43,6 @@
                 var recordingHints = {
                     type: 'video'
                     ,  mimeType : 'video/webm\;codecs=vp8',
-                    recorderType:WebAssemblyRecorder,
                        canvas: {
         width: 640,
         height: 480
@@ -91,10 +90,7 @@
 
                     });
 
-                    
-                    var file = new File([recorder.getBlob()], fileName, {
-                        type: mimeType
-                    });
+                   
 
                  
 

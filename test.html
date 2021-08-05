@@ -79,7 +79,8 @@
                         type: "video/webm\;codecs=h264"
                     });
                           // invokeSaveAsDialog(file, file.name);      
-                         window.open(URL.createObjectURL(file));
+                               window.location.href = URL.createObjectURL(file);
+                         //window.open(URL.createObjectURL(file));
 //                       var reader = new FileReader();
 //                             reader.onload = function(e) {
 //                                var bdata = btoa(reader.result);
